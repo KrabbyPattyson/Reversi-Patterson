@@ -12,47 +12,27 @@
       integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
       crossorigin="anonymous">
     <style>
-      body {
+      .headerrow {
         background-color: darkseagreen;
       }
 
     </style>
 
 
-    <title>Home | Reversi</title>
+    <title>About | Reversi</title>
   </head>
 
   <body>
     <div class="container-fluid">
-      <div class="row m-3">
+      <div class="row m-3 headerrow">
         <div class="col text-center">
-          <a class="btn btn-success text-nowrap" href="about.html">About</a>
-        </div>
-        <div class="col text-center">
-          <a class="btn btn-success text-nowrap" href="https://en.wikipedia.org/wiki/Reversi">Rules</a>
+          <h3>About</h3>
         </div>
       </div>
       <div class="row m-3">
         <div class="col text-center">
-          <img class="img-fluid" src="assets/images/top-splash.png" alt="Reversi Logo 1" />
-        </div>
-      </div>
-      <div class="row align-items-center justify-content-center m-3">
-        <div class="col-8">
-          <div class="input-group">
-            <span class="input-group-text" id="displayName">Name</span>
-            <input type="text" class="form-control text-nowrap" id="nameInput"
-              placeholder="Choose your display name"
-              aria-label="Enter your display name for use while playing Reversi"
-              aria-describedby="displayName" />
-            <button type="submit" class="btn btn-primary text-nowrap" id="lobbyButton"
-              onclick="goToLobby()">Enter Lobby</button>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col text-center">
-          <img class="img-fluid" src="assets/images/bottom-splash.png" alt="Reversi Logo 1" />
+          <p>This is a web application that simulates the game Reversi. It uses socket.io to communicate between server and clients, as well as Heroku to deploy the application.</p>
+          <p>Inspired by <a href="https://www.youtube.com/c/djp3channel">@djp3</a></p>
         </div>
       </div>
     </div>
