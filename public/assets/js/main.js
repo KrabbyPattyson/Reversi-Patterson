@@ -285,6 +285,14 @@ socket.on('game_update', (payload) =>{
     }
 
     $('#my_color').html('<h3 id="my_color">I am ' + my_color + '</h3>');
+    if(payload.game.whose_turn === 'white'){
+        $("#my_color").append('<h4>It is white\'s turn</h4');
+    }
+    else if(payload.game.whose_turn === 'black'){
+        $("#my_color").append('<h4>It is black\'s turn</h4');
+    } else {
+        $("#my_color").append('<h4>Uhh, something really weird just happened - I\'m not sure whose turn it is</h4');
+    }
 
 
     let whitesum = 0;
@@ -332,7 +340,7 @@ socket.on('game_update', (payload) =>{
                     altTag = "empty space";
                 }
                 else if((old_board[row][column] === 'w') && (board[row][column] === 'b')){
-                    graphic = "black_to_white.gif";
+                    graphic = "white_to_black.gif";
                     altTag = "black token";
                 }
                 else if((old_board[row][column] === 'b') && (board[row][column] === 'w')){
@@ -345,8 +353,12 @@ socket.on('game_update', (payload) =>{
 
                 const t = Date.now();
                 $('#' + row + '_' + column).html('<img class="img-fluid" src=" assets/images/' + graphic + '?time=' + t + '" alt="' + altTag + '" />');
-                $('#' + row + '_' + column).off('click');
-                if(board[row][column] === ' ') {
+            }
+            /* Set up interactivity here */
+            $('#' + row + '_' + column).off('click');
+            $('#' + row + '_' + column).removeClass('hovered_over');
+            if (payload.game.whose_turn === my_color) {
+                if (payload.game.legal_moves[row][column] === my_color.substring(0, 1)) {
                     $('#' + row + '_' + column).addClass('hovered_over');
                     $('#' + row + '_' + column).click(((r, c) => {
                         return (() => {
@@ -359,12 +371,11 @@ socket.on('game_update', (payload) =>{
                             socket.emit('play_token', payload);
                         });
                     })(row, column));
-                } else {
-                    $('#' + row + '_' + column).removeClass('hovered_over');
                 }
             }
         }
     }
+
     $("#whitesum").html(whitesum);
     $("#blacksum").html(blacksum);
     old_board = board;
@@ -377,6 +388,7 @@ socket.on('play_token_response', (payload) =>{
     }
     if(payload.result === 'fail'){
         console.log(payload.message);
+        alert(payload.message);
         return;
     }
 });
